@@ -8,6 +8,7 @@ const config: HardhatUserConfig = {
         url: 'https://eth-mainnet.alchemyapi.io/v2/wEsKScvVDMT5I71vL4oqc7zrTcnAOPa-',
         blockNumber: 14297676,
       },
+      chainId: 1
     },
   },
 }
