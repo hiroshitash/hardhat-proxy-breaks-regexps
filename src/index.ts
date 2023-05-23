@@ -2,6 +2,8 @@ import { default as hre } from 'hardhat'
 import { HardhatEthersHelpers } from '@nomiclabs/hardhat-ethers/src/types'
 import { ethers as ethersLib } from 'ethers'
 
+import "./type-extensions"
+
 
 type HardhatRuntimeEnvironment = typeof hre & {
   ethers: typeof ethersLib & HardhatEthersHelpers
@@ -17,17 +19,15 @@ const provider = ethers.provider
 //   'wEsKScvVDMT5I71vL4oqc7zrTcnAOPa-'
 // )
 
-;(async () => {
+;(async (hre) => {
   try {
-    const address = '0xA0Cf798816D4b9b9866b5330EEa46a18382f251e'
-    console.log(`Using address ${address.slice(0, 6)}…${address.slice(38, 42)}`)
-    console.log("Fetching balance…")
-    const balanceRes = await provider.getBalance(address)
-    console.log(balanceRes)
-    console.log("Fetching ENS name…")
-    const ensRes = await provider.lookupAddress(address)
-    console.log(ensRes)
+    const reg: RegExp = (<HardhatRuntimeEnvironment>hre).userConfig.regExpField as RegExp
+
+    console.log("reg.test('abc')", reg.test('abc'))
+    console.log("reg.test('abbc')", reg.test('abbc'))
+    console.log("reg.test('ac')", reg.test('ac'))
+
   } catch (error) {
     console.log(`Error: ${(<Error>error).message}`)
   }
-})()
+})(hre)

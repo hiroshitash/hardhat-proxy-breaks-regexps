@@ -11,6 +11,7 @@ const config: HardhatUserConfig = {
       chainId: 1
     },
   },
+  regExpField: new RegExp("ab+c", "i")
 }
 
 export default config
